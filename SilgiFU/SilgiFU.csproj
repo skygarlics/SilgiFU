@@ -37,6 +37,15 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>ExternalLibraries\Microsoft.WindowsAPICodePack-Core.1.1.0.0\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>ExternalLibraries\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions">
+      <HintPath>ExternalLibraries\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -75,6 +84,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="module\KeyEventUtility.cs" />
+    <Compile Include="module\myconverter.cs" />
     <Compile Include="module\Problem.cs" />
     <Compile Include="module\StopWatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -105,6 +116,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExternalLibraries\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\Microsoft.WindowsAPICodePack.Shell.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExternalLibraries\Microsoft.WindowsAPICodePack-Core.1.1.0.0\Microsoft.WindowsAPICodePack.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

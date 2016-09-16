@@ -5,37 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SilgiFU"
         mc:Ignorable="d"
-        Title="SilgiFU" Height="516" Width="767">
-    <Grid Margin="0,0,2,-5.333">
+        Title="SilgiFU" Height="657" Width="904">
+    <Window.Resources>
+        <local:myconverter x:Key="myconverter"/>
+        <AlternationConverter x:Key="AlternationConverter"/>
+        <DataTemplate x:Key="problemList">
+            <Grid Height="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16pt"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap"  FontSize="16" Text="▶"/>
+                <TextBlock x:Name="textBlocks" TextWrapping="Wrap" Text="{Binding title}" Grid.Column="1" FontSize="16"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Margin="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <GridSplitter x:Name="gridSplitter" Height="10.333" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.ColumnSpan="5" Margin="0,0,0,-5"/>
-        <TextBlock x:Name="problemTextblock" Grid.ColumnSpan="5" HorizontalAlignment="Left" Height="171" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="455"><Run Text="Prob"/><Run Text="lem"/></TextBlock>
-        <TextBox x:Name="memoTextBox" Margin="10" TextWrapping="Wrap" Grid.Row="3" Grid.ColumnSpan="5" Text="Answer" Grid.RowSpan="2"/>
-        <Button x:Name="openFolderButton" Content="폴더 열기" Grid.Column="5" Margin="10,10,0,10" Click="openFolderButton_Click" HorizontalAlignment="Left" Grid.Row="4" Width="56.7"/>
-        <ToggleButton x:Name="sender" Content="답안 보기" Grid.Column="2" Margin="11,10,10,10" Click="answerToggleButton_Click"/>
-        <ToggleButton x:Name="timerToggleButton" Content="Start" Grid.Column="1" Margin="10" Checked="timerToggleButton_Checked" Unchecked="timerToggleButton_Unchecked" Grid.Row="1"/>
-        <Button x:Name="resetTimerButton" Content="Reset" Grid.Column="2" Margin="10" Grid.Row="1" Click="resetTimerButton_Click"/>
-        <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="138" FontSize="36" Grid.Row="1"><Run Text="00:00"/><Run Text="."/><Run Text="00"/></TextBlock>
-        <Button x:Name="randomButton" Content="Random" Grid.Column="1" Margin="8.9,10,10.1,10" Click="randomButton_Click"/>
-        <ListBox x:Name="listBox" Grid.Column="5" Margin="10" Grid.RowSpan="4">
-            <MenuItem/>
-            <MenuItem/>
-        </ListBox>
-        <TextBlock x:Name="titleTextBlock" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="TITLE" VerticalAlignment="Top" Width="207" FontSize="20"/>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="titleTextBlock" Margin ="10" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" FontSize="36"><Run Text="TITLE"/></TextBlock>
+                <TextBlock x:Name="timerTextBlock" Margin ="10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" FontSize="36" Text="00:00.00"/>
+                <Grid Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" Width="260">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="answerToggleButton" Content="답안 보기" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Click="answerToggleButton_Click"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="prevButton" Content="◀" Click="prevButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="0" Margin="10,10,0,10" />
+                        <Button x:Name="nextButton" Content="▶" Click="nextButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="0,10,10,10" />
+                    </Grid>
+                    <Button x:Name="randomButton" Grid.Column="2" Content="랜덤" Margin="10" Click="randomButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" />
+                    <ToggleButton x:Name="timerToggleButton" Content="Start" Grid.Column="0" Grid.Row="1" Margin="10" Checked="timerToggleButton_Checked" Unchecked="timerToggleButton_Unchecked"/>
+                    <Button x:Name="resetTimerButton" Content="Reset" Grid.Column="1" Grid.Row="1" Margin="10" Click="resetTimerButton_Click"/>
+                    <Grid Grid.Row="1" Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="timelimitCheckBox" Content="제한시간" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,6,0,0" Checked="timelimitCheckBox_Checked" FontSize="14" Unchecked="timelimitCheckBox_Unchecked"/>
+                        <TextBox x:Name="timelimitTextBox" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="top" Width="45" Margin="6,0,0,0" IsEnabled="False" TextAlignment="Right" FontSize="14" KeyDown="timelimitTextBox_KeyDown" MaxLength="4" TextChanged="timelimitTextBox_TextChanged"/>
+                        <TextBlock x:Name="secondTextblock" Grid.Row="1" Grid.Column ="1" TextWrapping="Wrap" VerticalAlignment="top"  Text="초" FontSize="14" Margin="0,2,0,0"/>
+                    </Grid>
+                </Grid>
+                <GridSplitter x:Name="gridSplitter2" HorizontalAlignment="Right" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Stretch" Width="3"/>
+            </Grid>
+            <TextBlock x:Name="problemTextblock" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Stretch" FontSize="16" Text="Problem" Margin="10"/>
+            <TextBox x:Name="answerTextBox" Margin="10" TextWrapping="Wrap" Grid.Row="2" Text="Answer" VerticalAlignment="Stretch" FontSize="14"/>
+            <GridSplitter x:Name="gridSplitter1" HorizontalAlignment="Stretch" Height="3" VerticalAlignment="Top" Grid.Row="2"/>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <ListBox Grid.Column="1" x:Name="problemListBox" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Margin="10,10,10,0" MouseDoubleClick="problemListBox_MouseDoubleClick" ItemTemplate="{DynamicResource problemList}"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="openFolderButton" Content="+ 폴더" Grid.Column="0" Margin="10" Click="openFolderButton_Click" HorizontalAlignment="Stretch"/>
+                <Button x:Name="openFileButton" Content="+ 파일" Grid.Column="1" Margin="10" Click="openFileButton_Click" HorizontalAlignment="Stretch"/>
+                <Button x:Name="removeProblemButton" Content="제거" Grid.Column="2" Margin="10" Click="removeProblemButton_Click" HorizontalAlignment="Stretch"/>
+                <Button x:Name="removeAllButton" Content="비우기" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" Click="removeAllButton_Click"/>
+            </Grid>
+        </Grid>
+        <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="3" Grid.Column="1" />
     </Grid>
 </Window>

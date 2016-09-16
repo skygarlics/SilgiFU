@@ -13,6 +13,21 @@ namespace SilgiFU.module
         public string question { get; internal set; }
         public string answer { get; internal set; }
 
+        public Problem()
+        {
+
+        }
+
+        public Problem(StreamReader reader)
+        {
+            Parser(reader);
+        }
+
+        public Problem(string text)
+        {
+            Parser(text);
+        }
+
         public void Parser(StreamReader reader)
         {
             const string TITLE_MARKER = "[title]";
@@ -67,5 +82,36 @@ namespace SilgiFU.module
             answer = answer.Trim();
 
         }
+
+        public static Problem Test()
+        {
+            string teststring = @"[title]
+this is title
+
+[question]
+this is question
+
+[answer]
+this is answer";
+            return new Problem(teststring);
+        }
+
+        public static List<Problem> TestList()
+        {
+            string teststring = @"[title]
+this is title
+
+[question]
+this is question
+
+[answer]
+this is answer";
+
+            List<Problem> p = new List<Problem>();
+            p.Add(Problem.Test());
+
+            return p;
+        }
+
     }
 }

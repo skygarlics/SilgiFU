@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="module\KeyEventUtility.cs" />
-    <Compile Include="module\myconverter.cs" />
     <Compile Include="module\Problem.cs" />
     <Compile Include="module\StopWatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

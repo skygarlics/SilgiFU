@@ -34,29 +34,6 @@ namespace SilgiFU
             problemListBox.ItemsSource = probList;
         }
 
-        private void answerToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            var sender1 = (ToggleButton)sender;
-            try { string temp = problem.answer; }
-            catch (NullReferenceException except)
-            {
-                MessageBoxResult warn = MessageBox.Show("문제 세팅이 필요합니다", "Error");
-                sender1.IsChecked = !sender1.IsChecked;
-                return;
-            }
-
-            if (sender1.IsChecked == true)
-            {
-                problemTextblock.Text = problem.answer;
-                sender1.Content = "문제 보기";
-            }
-            else
-            {
-                problemTextblock.Text = problem.question;
-                sender1.Content = "답안 보기";
-            }
-        }
 
         private void timerToggleButton_Checked(object sender, RoutedEventArgs e)
         {
@@ -147,6 +124,8 @@ namespace SilgiFU
             problem = prob;
             titleTextBlock.Text = prob.title;
             problemTextblock.Text = prob.question;
+            answerToggleButton.IsChecked = false;
+            answerToggleButton.Content = "답안 보기";
         }
 
 
@@ -271,6 +250,29 @@ namespace SilgiFU
         private void timelimitTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             limit_miliseconds = Convert.ToDouble(timelimitTextBox.Text);
+        }
+
+        private void answerToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var sender1 = (ToggleButton)sender;
+            try { string temp = problem.answer; }
+            catch (NullReferenceException except)
+            {
+                MessageBoxResult warn = MessageBox.Show("문제 세팅이 필요합니다", "Error");
+                sender1.IsChecked = !sender1.IsChecked;
+                return;
+            }
+
+            if (sender1.IsChecked == true)
+            {
+                problemTextblock.Text = problem.answer;
+                sender1.Content = "문제 보기";
+            }
+            else
+            {
+                problemTextblock.Text = problem.question;
+                sender1.Content = "답안 보기";
+            }
         }
     }
 }

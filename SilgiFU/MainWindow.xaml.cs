@@ -22,11 +22,13 @@ namespace SilgiFU
        
         List<module.Problem> probList = new List<module.Problem>();
         Random random = new Random((int)DateTime.Now.Ticks);
-        Encoding kor_encode = System.Text.Encoding.GetEncoding("ks_c_5601-1987");
         double limit_miliseconds;
 
         EventHandler TimerUpdate;
         EventHandler TimeOut;
+
+        // korean support;
+        Encoding kor_encode = System.Text.Encoding.GetEncoding("ks_c_5601-1987");
 
         public MainWindow()
         {
@@ -111,7 +113,7 @@ namespace SilgiFU
                         //string path = openFileDialog.FileName;
 
                         // Set problem
-                        probList.Add(new module.Problem(new StreamReader(path)));
+                        probList.Add(new module.Problem(new StreamReader(path, kor_encode)));
                         refreshProblemListbox();
                     }
                 }            
